@@ -1,7 +1,7 @@
 void main() {
 //Declarar uma variavel e passar uma função
 double media = calcularMedia(10, 10, 10, 10);
-double divisao = calculrDivisao(10, 5);
+double divisao = calcularDivisao(10, 5);
 
 //Saída
 print('Média Aritmética');
