@@ -25,7 +25,7 @@ dynamic exibirCadastro (
   {
     required String funcionario,
     required String cargo,
-    required String salario
+    required double salario
     })
 
   {
