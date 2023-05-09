@@ -1,17 +1,16 @@
 import 'dart:io';
-
 void main() {
-  List<String> livros = ['Dom Casmurro', 'Memórias Póstumas de Brás Cubas', 'Quincas Borba']; // Lista de livros
+  List<String> livros = ['Dom Casmurro', 'O Pequeno Princípe', 'Box Harry Potter']; // Lista de livros
   Map<String, double> precos = {
     'Dom Casmurro': 20.0,
-    'Memórias Póstumas de Brás Cubas': 25.0,
-    'Quincas Borba': 18.0,
+    'Opequeno Príncipe': 25.0,
+    'Box Harry Potter': 180.0,
   }; // Map de preços
 
   List<String> livrosComprados = []; // Lista para armazenar os livros comprados
   double totalGasto = 0.0; // Variável para armazenar o total gasto com livros
 
-  print('Bem-vindo à nossa livraria!');
+  print('Bem-vindo à Book Store!');
   
   bool continuar = true;
   while (continuar) { // While
@@ -51,9 +50,6 @@ void main() {
         }
         break;
       case 4:
-        imprimirCarrinho(livrosComprados); // Função void
-        break;
-      case 5:
         print('Total gasto: R\$ $totalGasto');
         print('Obrigado pela visita, volte sempre!');
         continuar = false;
@@ -74,6 +70,6 @@ double? obterPreco(String nomeLivro, [Map<String, double>? precos]) { // Funçã
   if (precos != null) {
     return precos[nomeLivro];
   } else {
-    return null
+    return null;
   }
 }
