@@ -20,9 +20,10 @@ void main() {
     print('3 - Comprar um livro');
     print('4 - Ver carrinho de compras');
     print('5 - Finalizar compra e sair');
+    print('');
 
     int opcao = int.parse(stdin.readLineSync()!); // Entrada de dados
-
+    print('');
     switch (opcao) { // Switch
       case 1:
         imprimirLivros(livros); // Função void
