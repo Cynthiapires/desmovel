@@ -1,96 +1,83 @@
 import 'dart:io';
 
 void main() {
-  var locais = {
-    'Rio de Janeiro': 'RJ',
-    'Florianópolis': 'SC',
-    'Gramado': 'RS',
-    'Fortaleza': 'CE',
-    'Salvador': 'BA'
+  List<String> destinos = ['Rio de Janeiro', 'Salvador', 'Florianópolis'];
+  Map<String, double> precos = {
+    'Rio de Janeiro': 1500.0,
+    'Salvador': 1000.0,
+    'Florianópolis': 1200.0,
   };
 
   while (true) {
-    print('Informe o destino que deseja visitar:');
-    var destino = stdin.readLineSync();
+    print('Bem-vindo ao sistema de turismo!');
+    print('Escolha uma opção:');
+    print('1 - Ver destinos disponíveis');
+    print('2 - Calcular preço da viagem');
+    print('3 - Sair');
 
-    if (destino == null || destino.isEmpty) {
-      print('Destino inválido.');
-      continue;
+    String opcao = stdin.readLineSync()!;
+
+    switch (opcao) {
+      case '1':
+        listarDestinos(destinos);
+        break;
+
+      case '2':
+        print('Digite o destino desejado:');
+        String? destino = stdin.readLineSync();
+        print('Digite o número de pessoas:');
+        String? strNumPessoas = stdin.readLineSync();
+        int numPessoas = int.tryParse(strNumPessoas!) ?? 1;
+        calcularPrecoViagem(destino, numPessoas, precos);
+        break;
+
+      case '3':
+        print('Obrigado por utilizar o sistema de turismo!');
+        return;
+
+      default:
+        print('Opção inválida!');
+        break;
     }
-
-    var sigla = siglaEstado(locais, destino);
-
-    if (sigla == null) {
-      print('Destino não encontrado.');
-      continue;
-    }
-
-    print('A sigla do estado de $destino é $sigla.');
-    print('Deseja continuar? (S/N)');
-    var resposta = stdin.readLineSync()?.toUpperCase() ?? '';
-
-    if (resposta == 'N') {
-      break;
-    }
-  }
-
-  print('Programa encerrado.');
-}
-
-// Função com retorno que retorna a sigla do estado de um determinado destino.
-String? siglaEstado(Map<String, String> locais, String destino) {
-  var sigla = locais[destino];
-  return sigla;
-}
-
-// Função com parâmetros opcionais que exibe informações sobre um hotel.
-void hotelInfo(String nome, {String? endereco, int? quartos, double? diaria}) {
-  print('Nome: $nome');
-  if (endereco != null) {
-    print('Endereço: $endereco');
-  }
-  if (quartos != null) {
-    print('Quartos disponíveis: $quartos');
-  }
-  if (diaria != null) {
-    print('Diária: R\$ $diaria');
   }
 }
 
-// Função anônima que verifica se um destino é nacional ou internacional.
-Function nacionalOuInternacional = (String destino) {
-  if (destino == 'Paris' || destino == 'Londres' || destino == 'Nova York') {
-    print('$destino é um destino internacional.');
+// função para listar os destinos disponíveis (função com parâmetro obrigatório)
+void listarDestinos(List<String> destinos) {
+  print('Destinos disponíveis:');
+  for (var destino in destinos) {
+    print('- $destino');
+  }
+}
+
+// função para calcular o preço da viagem (função com parâmetros obrigatórios e opcionais)
+void calcularPrecoViagem(String? destino, int numPessoas, Map<String, double> precos) {
+  if (destino == null) {
+    print('Destino inválido!');
+    return;
+  }
+
+  double preco = precos[destino] ?? 0.0;
+  double precoTotal = preco * numPessoas;
+
+  // função anônima para exibir o resultado do cálculo
+  Function exibirPrecoTotal = () {
+    print('Preço total da viagem para $destino: R\$ ${precoTotal.toStringAsFixed(2)}');
+  };
+
+  if (numPessoas == 1) {
+    exibirPrecoTotal();
   } else {
-    print('$destino é um destino nacional.');
-  }
-};
-
-// Lista de pontos turísticos do Rio de Janeiro.
-List<String> pontosTuristicos = ['Cristo Redentor', 'Pão de Açúcar', 'Copacabana', 'Jardim Botânico'];
-
-// Switch que exibe informações sobre um ponto turístico escolhido pelo usuário.
-void exibirPontoTuristico(String ponto) {
-  switch (ponto) {
-    case 'Cristo Redentor':
-      print('O Cristo Redentor é uma estátua do Cristo localizada no topo do morro do Corcovado.');
-      break;
-    case 'Pão de Açúcar':
-      print('O Pão de Açúcar é um morro localizado na cidade do Rio de Janeiro.');
-      break;
-    case 'Copacabana':
-      print('Copacabana é uma das praias mais famosas da cidade do Rio de Janeiro.');
-      break;
-    case 'Jardim Botânico':
-      print('O Jardim Botânico do Rio de Janeiro é um dos mais importantes jardins botânicos do mundo.');
-      break;
-    default:
-      print('Ponto turístico não encontrado.');
+    print('Preço para $numPessoas pessoas:');
+    exibirPrecoTotal();
+    double precoPorPessoa = precoTotal / numPessoas;
+    print('Preço por pessoa: R\$ ${precoPorPessoa.toStringAsFixed(2)}');
   }
 }
 
-// O programa de turismo em Dart utiliza conceitos básicos da linguagem, como loops, funções e condicionais, 
-//para criar um mapa de locais com suas siglas de estados correspondentes. Ao receber o nome do destino turístico 
-//escolhido pelo usuário, o programa verifica se o destino é válido e, se for, utiliza uma função para encontrar 
-//a sigla correspondente ao estado. Em seguida, exibe a sigla do estado e permite que o usuário continue ou interrompa 
-//o programa. O programa também possui outras funções, como a exibição de informações sobre hotéis e pontos turísticos.
+
+// O programa em Dart é um sistema de turismo que permite ao usuário escolher entre as opções de listar os 
+//destinos disponíveis, calcular o preço da viagem para um destino escolhido e sair do programa. O programa 
+//utiliza um laço `while` para manter o menu principal em execução e faz uso de funções para listar os destinos 
+//e calcular o preço da viagem com base no destino escolhido e no número de pessoas que irão viajar. O programa 
+//também utiliza condicionais `if` e `switch`, entrada de dados do usuário e um mapa para armazenar os preços dos destinos.
