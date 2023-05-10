@@ -74,3 +74,9 @@ double? obterPreco(String nomeLivro, [Map<String, double>? precos]) { // Funçã
     return null;
   }
 }
+
+//O código apresenta um programa de loja de livros em que o usuário pode escolher entre algumas opções: 
+//ver a lista de livros disponíveis, ver o preço de um livro, comprar um livro, ver o carrinho de compras e
+//finalizar a compra. Para isso, o código utiliza uma lista de livros, um mapa de preços, uma lista para 
+//armazenar os livros comprados e uma variável para armazenar o total gasto.
+
