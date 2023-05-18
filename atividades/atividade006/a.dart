@@ -29,7 +29,6 @@ void main() {
         apagarItensDoArquivo();
         break;
       case 5:
-        ();
         break;
       case 6:
         running = false;
