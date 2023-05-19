@@ -57,15 +57,15 @@ void criarArquivo() {
 }
 
 void gravarListaNoArquivo() {
-    print('Digite o nome do arquivo:');
-    var nomeArquivo = stdin.readLineSync()!;
-    var file = File(nomeArquivo);
+  print('Digite o nome do arquivo:');
+  var nomeArquivo = stdin.readLineSync()!;
+  File file = File('./atividades/atividade006/$nomeArquivo');
 
 
   print('Digite os itens separados pro vírgula:');
   var itens = stdin.readLineSync()!.split(',');
 
-  file.openWrite().write(itens);
+  file.openWrite().write(itens.toString());
 
   print('Itens gravados no arquivo.');
 }
