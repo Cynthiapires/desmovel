@@ -61,17 +61,11 @@ void gravarListaNoArquivo() {
     var nomeArquivo = stdin.readLineSync()!;
     var file = File(nomeArquivo);
 
-  if (!file.existsSync()) {
-    print('O arquivo não existe.');
-    return;
-  }
 
   print('Digite os itens separados pro vírgula:');
   var itens = stdin.readLineSync()!.split(',');
 
-  var sink = file.openWrite();
-  sink.writeAll(itens, '\n');
-  sink.close();
+  file.openWrite().write(itens);
 
   print('Itens gravados no arquivo.');
 }
