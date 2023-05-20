@@ -63,9 +63,9 @@ void gravarListaNoArquivo() {
 
 
   print('Digite os itens separados pro vírgula:');
-  var itens = stdin.readLineSync()!.split(',');
+  var itens = stdin.readLineSync()!.split(',').toString();
 
-  file.openWrite().write(itens.toString());
+  file.openWrite().write(itens);
 
   print('Itens gravados no arquivo.');
 }
